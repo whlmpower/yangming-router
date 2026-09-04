@@ -62,10 +62,10 @@ yangming-core (共享层：人设、模型、模板、安全、引用)
 
 ### 1. 安装
 
-将 `yangming-skills/` 目录复制到你的 Skills 安装目录：
+在 Agent 对话框中输入：
 
 ```
-C:\Users\Administrator\.trae-cn\skills\
+请帮我安装 `https://github.com/whlmpower/yangming-router` 中的 skill
 ```
 
 ### 2. 激活 Skill
