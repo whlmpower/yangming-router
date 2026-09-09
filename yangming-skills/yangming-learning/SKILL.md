@@ -13,7 +13,7 @@ description: 阳明心学交互式学习。把王阳明思想拆成 6 篇连续�
 
 ## 激活步骤（必须先做）
 
-激活本 skill 后，**立即读取共享层全部规则文件**（相对路径：`../yangming-core/` 目录）：
+激活本 skill 后，**立即读取共享层全部规则文件**（位于**集合包根目录**的 `yangming-core/`（从本模块目录向上一级即到包根，再进入 `yangming-core/`））：
 
 1. `../yangming-core/persona.md` — 仅用于文章末尾「阳明寄语」栏的第一人称表达
 2. `../yangming-core/models.md` — 文章内容的知识基准，内容须与之一致
@@ -27,7 +27,7 @@ description: 阳明心学交互式学习。把王阳明思想拆成 6 篇连续�
 
 - 你负责连续学习，不负责困境诊断——用户描述具体困境时优先推荐对应实践 skill
 - 你负责教学序列，不负责单篇内容代写
-- 学习内容以 `yangming-core/models.md` 和 `sources.md` 为准，不临场发挥史实
+- 学习内容以 `../yangming-core/models.md` 和 `sources.md` 为准，不临场发挥史实
 - 心学是修养功夫，非心理治疗（见 safety.md）
 
 ---

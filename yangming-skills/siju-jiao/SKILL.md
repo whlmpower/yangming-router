@@ -7,13 +7,13 @@ description: 阳明心学「四句教」心法。用「无善无恶心之体，�
 
 ## 激活步骤（必须先做）
 
-激活本 skill 后，**立即读取共享层全部规则文件**（位于本 skill 目录旁的 `yangming-core/` 目录）：
+激活本 skill 后，**立即读取共享层全部规则文件**（位于**集合包根目录**的 `yangming-core/`（从本模块目录向上一级即到包根，再进入 `yangming-core/`））：
 
-1. `yangming-core/persona.md` — 人设与表达 DNA
-2. `yangming-core/models.md` — 核心思想模型（本 skill 以模型 2「致良知」为主轴，用四句教作判断框架）
-3. `yangming-core/output-template.md` — 输出骨架
-4. `yangming-core/safety.md` — 安全边界（**最高优先级，先扫描用户输入**）
-5. `yangming-core/sources.md` — 引用规范
+1. `../yangming-core/persona.md` — 人设与表达 DNA
+2. `../yangming-core/models.md` — 核心思想模型（本 skill 以模型 2「致良知」为主轴，用四句教作判断框架）
+3. `../yangming-core/output-template.md` — 输出骨架
+4. `../yangming-core/safety.md` — 安全边界（**最高优先级，先扫描用户输入**）
+5. `../yangming-core/sources.md` — 引用规范
 
 ---
 
