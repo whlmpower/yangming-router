@@ -1,0 +1,214 @@
+<!--
+  ============================================================
+  三副卡 · 统一册页卡底模板（shared card shell）
+  ============================================================
+  本文件供以下 3 个 skill 复用，输出一段可直接保存为 .html
+  打开、截图分享的卡片：
+    · yangming-lizhi-tu     立志图
+    · yangming-xingcha-riji  省察日记
+    · yangming-meiri-xinyu   每日心语
+
+  用法：读取本文件，把下方「示例卡」中的占位内容替换为你
+  本 skill 的实际内容，输出完整 HTML 给用户（保留 <style>）。
+  调性：明代文人 / 宣纸 / 墨色 / 赭石 / 青绿 / 琥珀 / 朱印 /
+  远山 / 留白，与商品主图品牌统一。
+
+  三个内部版式片段见文件最末注释，按需取用。
+  ============================================================
+-->
+
+<style>
+  :root{
+    --paper:#f4ecda; --paper2:#efe4cb;
+    --ink:#2b241c; --ink-soft:#5a4f42;
+    --zhe:#7a3b1e; --qing:#3f6b5a; --amber:#b8924a;
+    --vermilion:#9e3b2e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:#ddd3bd; padding:24px;
+    font-family:"Kaiti SC","STKaiti","KaiTi","Songti SC",serif;
+    display:flex; gap:18px; flex-wrap:wrap; justify-content:center;
+  }
+  .leaf{
+    position:relative; width:360px; aspect-ratio:3/4;
+    background:linear-gradient(160deg,var(--paper),var(--paper2));
+    border-radius:4px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(40,28,18,.25);
+    flex:0 0 auto;
+    display:flex; flex-direction:column;
+  }
+  /* 纸纹 */
+  .leaf .grain{
+    position:absolute; inset:0; z-index:1; opacity:.05; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  /* 远山 */
+  .leaf .mountains{position:absolute; left:0; right:0; bottom:0; height:55%; z-index:1; pointer-events:none;}
+  .leaf .mountains svg{width:100%; height:100%; display:block;}
+  /* 双线框 */
+  .leaf .frame{
+    position:absolute; inset:14px; z-index:2; pointer-events:none;
+    border:1px solid rgba(122,103,71,.55);
+    box-shadow:inset 0 0 0 4px rgba(244,236,218,.6), inset 0 0 0 5px rgba(122,103,71,.35);
+  }
+  /* 四角饰 */
+  .leaf .corner{position:absolute; inset:14px; z-index:3; pointer-events:none;}
+  .leaf .corner svg{width:100%; height:100%;}
+  /* 标题帽 */
+  .leaf .head{position:relative; z-index:4; padding:26px 30px 0; display:flex; flex-direction:column; gap:3px;}
+  .leaf .cap{font-size:23px; letter-spacing:5px; color:var(--ink); font-weight:600;}
+  .leaf .sub{font-size:11px; letter-spacing:1px; color:var(--ink-soft); line-height:1.35;}
+  /* 朱印 */
+  .leaf .seal{
+    position:absolute; top:24px; right:26px; z-index:4;
+    width:34px; height:34px; border-radius:3px;
+    background:var(--vermilion); color:#f6ecd6; font-size:17px; letter-spacing:0;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:inset 0 0 0 1.5px rgba(246,236,214,.55);
+    transform:rotate(-3deg);
+  }
+  /* 题跋 */
+  .leaf .colophon{
+    position:absolute; left:30px; right:30px; bottom:18px; z-index:4;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:11px; letter-spacing:1.5px; color:var(--ink-soft);
+    border-top:1px solid rgba(122,103,71,.3); padding-top:7px;
+  }
+
+  /* ===== 立志图：立轴册页树 ===== */
+  .lizhi .tree{position:relative; flex:1; z-index:2; margin:10px 22px 56px;}
+  .lizhi .links{position:absolute; inset:0; width:100%; height:100%;}
+  .lizhi .n{position:absolute; transform:translate(-50%,-50%); text-align:center;}
+  .lizhi .root{
+    width:74px; padding:8px 0; border-radius:4px;
+    background:var(--vermilion); color:#f6ecd6;
+    font-size:13px; letter-spacing:2px;
+    box-shadow:inset 0 0 0 1.5px rgba(246,236,214,.5);
+  }
+  .lizhi .trunk{
+    width:196px; padding:10px 10px; border-radius:3px;
+    background:linear-gradient(180deg,#fbf4e2,#f1e6c9);
+    border:1px solid var(--zhe);
+    font-size:13px; line-height:1.45; letter-spacing:1px;
+    box-shadow:0 3px 8px rgba(122,59,30,.18);
+  }
+  .lizhi .trunk b{color:var(--zhe); font-size:14px; letter-spacing:2px; white-space:nowrap;}
+  .lizhi .leaf-node{
+    width:70px; padding:5px 4px; border-radius:3px;
+    background:rgba(63,107,90,.14);
+    border-left:3px solid var(--qing);
+    box-shadow:0 2px 5px rgba(63,107,90,.10);
+    font-size:11px; line-height:1.35; letter-spacing:.5px; color:var(--ink);
+    text-align:left;
+  }
+  .lizhi .leaf-node b{color:var(--qing);}
+
+  /* ===== 省察日记 / 每日心语 内部版式 ===== */
+  .body{flex:1; z-index:2; padding:14px 30px 52px; display:flex; flex-direction:column; gap:13px;}
+  .block{}
+  .lbl{
+    font-size:12px; letter-spacing:3px; color:var(--zhe);
+    margin-bottom:5px; display:inline-block;
+    border-bottom:1px solid rgba(122,59,30,.35); padding-bottom:2px;
+  }
+  .lbl.accent{color:var(--qing); border-color:rgba(63,107,90,.4);}
+  .quote{
+    font-size:14px; line-height:1.7; letter-spacing:1px; color:var(--ink);
+    background:rgba(184,146,74,.10); border-left:3px solid var(--amber);
+    padding:9px 12px; border-radius:3px;
+  }
+  .text{font-size:13px; line-height:1.75; letter-spacing:.6px; color:var(--ink-soft);}
+  .quote-big{
+    font-size:21px; line-height:1.7; letter-spacing:4px; color:var(--ink);
+    text-align:center; margin:8px 0 4px; font-weight:600;
+  }
+</style>
+
+
+<!-- ======================= 示例卡：立志图 ======================= -->
+<!-- 复制此 .leaf 块，替换内部内容即可。其它两版见文件末注释。 -->
+<div class="leaf lizhi">
+  <div class="grain"></div>
+  <div class="mountains"><svg viewBox="0 0 360 260" preserveAspectRatio="none">
+    <path d="M0,260 L0,170 C46,120 80,150 126,105 C172,60 206,130 252,95 C296,55 330,105 360,85 L360,260 Z" fill="#2b241c"/>
+    <path d="M0,260 L0,205 C58,180 104,210 162,175 C220,140 262,190 308,165 C336,150 360,175 360,168 L360,260 Z" fill="#2b241c" opacity="0.6"/>
+  </svg></div>
+  <div class="frame"></div>
+  <div class="corner"><svg viewBox="0 0 332 480" preserveAspectRatio="none">
+    <g fill="none" stroke="#7a6747" stroke-width="2">
+      <path d="M0,16 L0,0 L16,0"/><path d="M316,0 L332,0 L332,16"/>
+      <path d="M0,464 L0,480 L16,480"/><path d="M316,480 L332,480 L332,464"/>
+    </g></svg></div>
+  <div class="head"><span class="cap">立志图</span><span class="sub">本心 · 志 · 功夫</span></div>
+  <div class="seal">志</div>
+
+  <div class="tree">
+    <svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <g fill="none" stroke="#8a7a5a" stroke-width="1.2" vector-effect="non-scaling-stroke" stroke-linecap="round">
+        <path d="M50,88 C50,82 50,74 50,66"/>
+        <path d="M50,66 C50,60 50,54 50,48"/>
+        <path d="M50,48 C46,44 42,40 36,34"/>
+        <path d="M50,48 C54,44 58,40 64,34"/>
+        <path d="M50,48 C44,38 34,26 24,16"/>
+        <path d="M50,48 C56,38 66,26 76,16"/>
+      </g>
+      <g fill="#8a7a5a">
+        <circle cx="50" cy="88" r="1.5"/><circle cx="50" cy="66" r="1.5"/>
+        <circle cx="50" cy="48" r="1.3"/>
+        <circle cx="36" cy="34" r="1.2"/><circle cx="64" cy="34" r="1.2"/>
+        <circle cx="24" cy="16" r="1.2"/><circle cx="76" cy="16" r="1.2"/>
+      </g>
+    </svg>
+    <div class="n root" style="left:50%; top:88%;">良知本体</div>
+    <div class="n trunk" style="left:50%; top:66%;">吾志<br><b>{一句话志}</b></div>
+    <div class="n leaf-node" style="left:36%; top:34%;"><b>①</b> {功夫一}<br>{说明}</div>
+    <div class="n leaf-node" style="left:64%; top:34%;"><b>②</b> {功夫二}<br>{说明}</div>
+    <div class="n leaf-node" style="left:24%; top:16%;"><b>③</b> {功夫三}<br>{说明}</div>
+    <div class="n leaf-node" style="left:76%; top:16%;"><b>④</b> {功夫四}<br>{说明}</div>
+  </div>
+  <div class="colophon"><span>{一句收尾金句}</span><span>· 阳明</span></div>
+</div>
+
+
+<!--
+  ============================================================
+  内部版式片段（供复制粘贴）
+  ============================================================
+
+  【省察日记 · 内部版式】
+  替换示例卡中 class="leaf lizhi" 为 class="leaf"，并把 .tree
+  整块替换为下方 .body 块：
+
+  <div class="body">
+    <div class="block">
+      <span class="lbl">今日所省</span>
+      <div class="quote">{用户原话 / 一句反省}</div>
+    </div>
+    <div class="block">
+      <span class="lbl accent">阳明批注</span>
+      <div class="text">{一段阳明口吻批注，温和坚定，点出私欲/习气/良知处}</div>
+    </div>
+    <div class="block">
+      <span class="lbl accent">明日一功</span>
+      <div class="text">{一条明日可做的功夫建议，具体、小、可落}</div>
+    </div>
+  </div>
+
+  【每日心语 · 内部版式】
+  <div class="body">
+    <div class="block">
+      <span class="lbl">今日心语</span>
+      <div class="quote-big">"{原文金句}"</div>
+    </div>
+    <div class="block">
+      <span class="lbl accent">白话</span>
+      <div class="text">{一句白话释义}</div>
+    </div>
+    <div class="block">
+      <span class="lbl accent">一问</span>
+      <div class="text">{一个让对方今日可自省的反问}</div>
+    </div>
+  </div>
+  ============================================================
+-->
